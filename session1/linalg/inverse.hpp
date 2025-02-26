@@ -94,30 +94,39 @@ vector<float> LU_decompisition(vector<vector <float>> A){
     int elim_col;
     vector<float> pivots;
     pivots.reserve(rows*cols);
+    vector<float> pivots_pos;
+    pivots_pos.reserve(rows*cols);
 
     // THIS FORM DOES NOT WORK FOR 2D VECTOR U
-    // for (int row = 0; row < rows; row++){
-    //     for (int col = 0; col < cols; col++){
-    //         pivot = U[row + col];
-    //         if (pivot != 0){
-    //             elim_col = col;
-    //         }
-    //     }
-    // }
-
-    // check to see whether the values under each pivot are non-zero
-    for (int idx = 0; idx < U.size(); idx++){
-        pivots.push_back(pivot);
-        for (int val = cols; val < U.size(); val+=3){
-            if (U[pivot+val] != 0){
-                elim_col = pivot+val;
+    for (int row = 0; row <= rows; row++){
+        for (int col = 0; col <= cols; col++){
+            cout << "row: " << row << " | " << "col: " << col << endl;
+            // if (row == 0 && col == 0){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            // else if(row == (col - 1)){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            // else if (row == rows && col == cols){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            if (row == col){
+                cout << A[row][col] << "| pos: " << row+col << endl;
+                pivots.push_back(A[row][col]);
+                pivots_pos.push_back(row+col);
             }
-            cout << "Elimination Col: " << elim_col << " | idx: " << elim_col << idx << endl;
         }
-        pivot = U[pivot+A.size()+1];
     }
 
-    display_vec(pivots);
+
+    // Find current pivot value. Then add the cols variable to it until its larger that A.size()
+    // any value that appears until A.size() that isn't zero results in that being the active column
+    
+
+    display_vec(pivots_pos);
 
     // for i in all pivot values. take i and divide by the values under it in that row for matrix U (row,col can get you this quickly)
     // take the resulting values of those U multipliers and fill them in the indices for those multipliers but in L
