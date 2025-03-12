@@ -6,6 +6,14 @@
 - [done] create hello world
 - Start from the bottom and work are way up
 - create make file as well
+
+*Linear:*
+1. Matrix multiplication
+2. scalar mult
+3. Inverse function
+4. LU Decomposition
+
+*ML:*
 1. Linear Regression
 2. Ridge Regression
 3. Lasso Regression

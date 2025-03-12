@@ -97,7 +97,32 @@ vector<float> LU_decompisition(vector<vector <float>> A){
     vector<float> pivots_pos;
     pivots_pos.reserve(rows*cols);
 
+    // THIS FORM DOES NOT WORK FOR 2D VECTOR U
+    for (int row = 0; row < rows; row++){
+        for (int col = 0; col < cols; col++){
+            cout << "row: " << row << " | " << "col: " << col << endl;
+            // if (row == 0 && col == 0){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            // else if(row == (col - 1)){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            // else if (row == rows && col == cols){
+            //     pivots.push_back(A[row][col]);
+            //     pivots_pos.push_back(row+col);
+            // }
+            if (row == col){
+                cout << A[row][col] << "| pos: " << row+col << endl;
+                pivots.push_back(A[row][col]);
+                pivots_pos.push_back(row+col);
+            }
+        }
+    }
 
+
+    cout << "MOD: ================" << endl;
     // THIS IS HOW YOU FIND PIVOTs
     for (int i = 0; i < U.size(); i++){
         if (i%(rows+1) == 0){
