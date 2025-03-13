@@ -90,6 +90,11 @@ vector<float> LU_decompisition(vector<vector <float>> A){
     // update L with those multipliers
     // modify the L and U matrices accordingly
 
+    // take the values in pivot 1,1 and find each value in this column
+    // row 2, col 1: multiplier 'm': where U[1,1] = p and U[2,1] = x ---> m[2,1] = x/p
+    // --> now update L so that L[2,1] = x/p
+    // repeat for each value in each column underneath a pivot value
+
     double pivot = 0;
     int elim_col;
     vector<float> pivots;
@@ -106,10 +111,26 @@ vector<float> LU_decompisition(vector<vector <float>> A){
     }
 
 
-    // Find current pivot value. Then add the cols variable to it until its larger that A.size()
+    // THIS IS HOW YOU FIND PIVOTs
+    for (int idx = 0; idx < U.size(); idx++){
+        if (idx%(rows+1) == 0){
+            //we've found our pivot value, now lets calculate the multiples and then modify the L
+            for(int j = idx+cols; j<U.size(); j+=cols){
+                printf("u[%d,%d]\n", idx, j);
+                double multiplier = U[j]/U[idx];
+                printf("L[%d, %d] = %f\n", idx, j, multiplier);
+                printf("U[j] = %f and U[idx] = %f\n", U[j], U[idx]);
+                L[j] = multiplier;
+            }
+        }
+    }
+
+    display_vec(L);
+
+
+    // Find current pivot value. Then add the cols variable to it until its larger than A.size()
     // any value that appears until A.size() that isn't zero results in that being the active column
     
-
     display_vec(pivots_pos);
 
     // for i in all pivot values. take i and divide by the values under it in that row for matrix U (row,col can get you this quickly)
