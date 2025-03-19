@@ -16,6 +16,11 @@
 - We were able to get to the point right before assigning the values into the L matrix, but we did calculate all of them for the first column correctly
 - we've got the right idea, but something is wrong
 
+*03/18/2025:*
+- once again forcing myself to do this late at night. This just how it be my dude.
+- you figured out the issue regarding why the LU Decomp was outputting that weird float value, its because you aren't updating U before updating L again.
+- - the idea is commented in the code
+
 Next steps:
 - finish elimination step.
 - test and evaluate.

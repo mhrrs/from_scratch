@@ -116,15 +116,22 @@ vector<float> LU_decompisition(vector<vector <float>> A){
         if (idx%(rows+1) == 0){
             //we've found our pivot value, now lets calculate the multiples and then modify the L
             for(int j = idx+cols; j<U.size(); j+=cols){
-                printf("u[%d,%d]\n", idx, j);
+                // printf("u[%d,%d]\n", idx, j);
                 double multiplier = U[j]/U[idx];
                 printf("L[%d, %d] = %f\n", idx, j, multiplier);
-                printf("U[j] = %f and U[idx] = %f\n", U[j], U[idx]);
+                // printf("U[j] = %f and U[idx] = %f\n", U[j], U[idx]);
+
+                //update L
                 L[j] = multiplier;
             }
         }
+        // now we need to update U
+        break;
+        // double uMults = U[]
+
     }
 
+    cout<< "L:" << endl;
     display_vec(L);
 
 
