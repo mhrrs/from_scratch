@@ -22,6 +22,6 @@ int main(){
     vector<float> L = LU_decompisition(A);
 
     // output results
-    cout << "result: " << endl << L << endl;
+    // cout << "result: " << endl << L << endl;
     return 0;
 }

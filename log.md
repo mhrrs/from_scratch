@@ -21,6 +21,20 @@
 - you figured out the issue regarding why the LU Decomp was outputting that weird float value, its because you aren't updating U before updating L again.
 - - the idea is commented in the code
 
+*03/19/2025:*
+- i somehow only work at this right before i go to bed
+- going to try to finish the LU decomp
+- HA... that didn't happen. HOWEVER, I do think we figured out part of the issue. 
+>> the reason the U doesn't update correctly is because you're dividing by the wrong multiplier term
+>> I'm not sure you can update U in that same loop
+
+*03/25/2025:*
+- i started earlier tonight (at 8pm)
+- finished doing this at 10:15. Rewrote my algorithm for LU decomp for simplicity.
+- we now create a vector of multipliers to reference during the operation (this is slow, but let's just get something down first before optimizing)
+- I SUCCESSFULLY UPDATED THE U ON THE FIRST COLUMN.
+- - this has taken like a month of lackluster effort to do lol
+
 Next steps:
 - finish elimination step.
 - test and evaluate.
