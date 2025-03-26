@@ -34,6 +34,14 @@
 - we now create a vector of multipliers to reference during the operation (this is slow, but let's just get something down first before optimizing)
 - I SUCCESSFULLY UPDATED THE U ON THE FIRST COLUMN.
 - - this has taken like a month of lackluster effort to do lol
+- - I asked GPT for a rating on my code and it gave me a 5/10 hahaha
+- - it could def be better and more optimized
+- - - hold on will i actually have to use what I learned from an analysis and design of algos class? no f***** way
+
+*03/26/2025:*
+- going to continue to build the basic regression tasks
+- - try to finish the LU decomp/ inverse mat functions so that I can do linear regression lol
+
 
 Next steps:
 - finish elimination step.
