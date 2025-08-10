@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "inverse.hpp"
+#include "matrix.hpp"
 
 using namespace std;
 
@@ -23,6 +24,11 @@ int main(){
     cout << "U:" << endl;
     display_vec(U);
 
+    // verify that A = L * U
+    auto res = matrix_mult(L, U);
+    display_vec(res);
+
+    
 
     //now lets test finding the inverse:
     

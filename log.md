@@ -42,6 +42,14 @@
 - going to continue to build the basic regression tasks
 - - try to finish the LU decomp/ inverse mat functions so that I can do linear regression lol
 
+*04/03/2025:*
+- tackling this at 10:49PM, gonna give it a few minutes to see how much i can get done
+
+
+*06/08/2025:*
+- revisiting this project as I want to keep it somewhat relevant to what I am doing.
+- going to redesign the matrix_multiplication function to accomodate for single nest vectors of any size
+- then verify that your LU decomp and matrix_mult works correctly
 
 Next steps:
 - finish elimination step.
