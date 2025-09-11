@@ -51,6 +51,9 @@
 - going to redesign the matrix_multiplication function to accomodate for single nest vectors of any size
 - then verify that your LU decomp and matrix_mult works correctly
 
+*09/11/2025:*
+- i have been very bad about continuiing this project. can't believe its been over 6months since i started it.
+
 Next steps:
 - finish elimination step.
 - test and evaluate.

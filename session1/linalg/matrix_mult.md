@@ -1,5 +1,14 @@
 # DESCRIPTION: How does matrix multiplication function work?
 
+*intro*
+- part of the beauty of my implementation is that the expression to calculate e values gets linearly longer.
+- - there is no reason to multiply the first 12 values when calculating e [1,1] because all of the values for y[1,n] will be zero * L[1,n]
+
+
+
+
+*ARCHIVE::*
+
 INPUT:
 2 vector<float> objects
 2 rowxcol descriptions of those objects
