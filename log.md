@@ -54,6 +54,10 @@
 *09/11/2025:*
 - i have been very bad about continuiing this project. can't believe its been over 6months since i started it.
 
+*09/13/2025:*
+- ok now we have to find a way to have the first y1 value get included in the second calc for y2 inside the first 
+    part of the matrix multiplication algorithm for finding the y values for L that equal the e vectors
+
 Next steps:
 - finish elimination step.
 - test and evaluate.

@@ -3,6 +3,7 @@
 #include <string>
 #include "inverse.hpp"
 #include "matrix.hpp"
+#include "utils.hpp"
 
 using namespace std;
 
