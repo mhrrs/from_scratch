@@ -27,6 +27,7 @@ int main(){
 
     // verify that A = L * U
     auto res = matrix_mult(L, U);
+    cout << "Res:" << endl;
     display_vec(res);
 
     

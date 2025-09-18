@@ -8,92 +8,36 @@
 
 using namespace std;
 
-// class for Matrix
-// create single vector that holds all data
-// create attributes that let you know the columnsxrows info
 
-
-vector<float> matrix_mult(vector<float> A, vector<float> B){
-    // # of cols in A
-    int A_col = sqrt(A.size());
-
-    // THIS SHOULD INITIALIZE THE FIRST ROW OF THE IDENTITY MAT [this is technically wrong. i should make the first columnn for LU decomp purposes, this is the first row]
-    // vector<float> I;
-    // I.reserve(9);
-    // for (int i = 0; i < A_col; i++){
-    //     for (int j = 0; j < A_col; j++){
-    //         if (i == j){
-    //             I.push_back(1);
-    //         }
-    //         else{
-    //             I.push_back(0);
-    //         }
-    //     }
-    // }
-
-    // THIS SHOULD INITIALIZE THE FIRST ROW OF THE IDENTITY MAT [this is technically wrong. i should make the first columnn for LU decomp purposes, this is the first row]
-    vector<float> y;
-    vector<float> Y;
-    y.reserve(9);
-    Y.reserve(9);
-    for (int i = 0; i < int(A.size()); i++){
-        y.push_back(0);
-        Y.push_back(0);
-    }
-
-
-    int k = 0;
-    int count = 0;
-    cout << "A_col:" << A_col << endl;
-    cout << "A size:" << int(A.size()) << endl;
-    cout << "Y size:" << Y.size() << endl;
-    for (int i = 0; i<int(A.size()*A_col); i+=A_col){ // for the len of A vector | step == # of cols in A
-        for (int j = 0; j<int(A_col); j++){ // for the len of y vector | step == 1
-            cout << "k = " << A[i+j] << "*" << Y[j+i] << endl;
-            k += int(A[i+j])*int(Y[j]);
-        }
-        // Y[count] = I[i] - k;
-        // cout << "Y[count] = " << I[i] << " - " << k << endl;
-        count +=1;
-        k = 0;
-
-    }
-    
-
-    return Y;
+vector<float> matrix_mult(vector<float> L, vector<float> B){
+    // under dev
+    vector<float> y_hat = forward_substitute(L);
+    return y_hat;
 }
 
 
+// this setup is for finding the inverse
 vector<float> forward_substitute(vector<float> L){
-// # of cols in A
-    int L_col = sqrt(L.size());
+    // static cast of sqrt of matrix size
+    int n = static_cast<int>(std::sqrt(L.size())); // we do the static_cast to avoid compiler errors
 
-    // THIS SHOULD INITIALIZE THE FIRST ROW OF THE IDENTITY MAT [this is technically wrong. i should make the first columnn for LU decomp purposes, this is the first row]
-    vector<float> y;
-    vector<float> Y;
-    y.reserve(9);
-    Y.reserve(9);
-    for (int i = 0; i < L_col; i++){
-        y.push_back(0);
-        Y.push_back(0);
-    }
+    // lambda function: only valid for size 'n'
+    auto index = [n] (int i, int j) {return i*n+j;};
 
+    std::vector<float> Y(n*n, 0.0f);
 
-    int k = 0;
-    int count = 0;
-
-    for (int i = 0; i < (L_col*L_col); i+=L_col){ // for the len of A vector | step == # of cols in A
-
-        for (int j = 0; j < int(L_col); j++){ // for the len of y vector | step == 1
-            k += int(L[i+j]*Y[j]);
+    for (int k = 0; k < n; k++){
+        for (int i = 0; i < n; i++){
+            float sum = 0;
+            for (int j = 0; j< i; j++){
+                sum += L[index(i, j)] * Y[index(j, k)];
+                // cout << "A: "<< A[index(i, j)] * Y[index(j, k)] << " :Y" << endl;
+            }
+            float r = (i == k) ? 1.0f : 0.0f;
+            // Y[index(i, k)] = (r-sum)/A[index(i, i)];
+            Y[index(i, k)] = (r-sum);
         }
-        // Y[count] = I[i] - k;
-        // cout << "Y[count] = " << I[i] << " - " << k << endl;
-        count +=1;
-        k = 0;
-
     }
     
-
     return Y;
 }

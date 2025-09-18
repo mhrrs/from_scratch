@@ -13,3 +13,8 @@ step 1: elim for 1st column
 - remove the K values. just immediately index the multipliers with the operation. this requires less memory. 
 - - Does this require more calling though? hmmm
 - create compression of L&U into one matrix to conserve space? who knows, need to explore if this makes sense
+
+
+
+Forward Substitute:
+![alt text](image.png)
