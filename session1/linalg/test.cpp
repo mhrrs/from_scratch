@@ -10,11 +10,11 @@ using namespace std;
 
 int main(){
     //first lets create the A, and y to find 'x'
-    vector<vector<float>> A = {{2,3,1}, {4,7,2}, {6,18,5}};
+    vector<vector<float>> A = {{2,1,1}, {4,3,3}, {8,7,9}};
     vector<float> y = {1,0,1};
 
     //test LU Decomp:
-    auto result = LU_decompisition(A);
+    auto result = LU_decompisition_opt(A);
     std::vector<float> L = std::get<0>(result);
     std::vector<float> U = std::get<1>(result);
 

@@ -12,5 +12,6 @@ using namespace std;
 
 std::tuple<std::vector<float>, std::vector<float>> LU_decompisition(vector<vector <float>> A);
 
+std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<vector <float>> A);
 
 #endif

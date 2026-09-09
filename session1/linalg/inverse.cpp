@@ -18,7 +18,7 @@ using namespace std;
 // }
 
 
-// vector<vector<vector<float>>> LU_decompisition(vector<vector <float>> A){
+
 std::tuple<std::vector<float>, std::vector<float>> LU_decompisition(vector<vector <float>> A){
     // convert A to 2D format
     // init L
@@ -112,5 +112,80 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition(vector<vecto
         }
     }
 
-    return std::make_tuple(L, U);;
+    return std::make_tuple(L, U);
+}
+
+
+// Simply trying to optimize on the code created above
+std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<vector <float>> A){
+    vector<float> L;
+    vector<float> U;
+
+    // reservations
+    L.reserve(A.size()*A.size());
+    U.reserve(A.size()*A.size());
+    int cols = static_cast<int>(A.size());
+
+    // turning L into A
+    for (int i = 0; i < int(A.size()); i++){
+        for (int j = 0; j < int(A.size()); j++){
+                L.push_back(A[i][j]);
+                U.push_back(0);
+        }
+    }
+
+    // decomposing L into lower-triangular-mat and U into upper-triangular-mat
+    // assess diagonal
+    // find elimination value
+    // gather pivot value
+    // gather the elimination multiplier
+    // use row based elim
+    // reset and repeat
+
+    //idea:
+    // turn diagonal into 1s
+    // iterate through vector, if 1 is found add to TOTAL, then select the
+    // number of proceeding terms using the TOTAL value
+
+    // modify L in place
+    for (int i = 0; i <= (cols*cols)-1; i+=cols+1){ // < moves along diagonal
+        float pivot = L[i];
+
+        // go through each row in this column and reduce value.
+        for (int r = cols; r <= (cols*cols)-1; r+=cols){ // << Why did removing cols+1 work here?? 
+            // ^ maybe iterate by row number so that you then have the same index to call a specific row    
+            float mult = L[r]/pivot;
+
+            // obtain row values by identifying what row you're on
+            int cur_row_start = (r % cols);
+
+            std::cout << "mult: "  << mult << "| L[r]: " << L[r] << " | pivot: " << pivot << std::endl;
+            // std::cout << "r: " << r << " | r PER cols: " << r%cols << std::endl;
+            // std::cout << "cur_row_start: " << cur_row_start << std::endl;
+
+            for (int j = cur_row_start; j < cols; j++){
+                std::cout << "j: " << j << std::endl;
+                L[j] = L[j] - (mult * L[j-cols-1]);
+            }
+
+        }
+
+        // DEBUG
+        std::cout << "mid run: "<< i << " of " << (cols*cols)-1 << std::endl;
+        display_vec(L);
+
+        // for (int j = 0; j < L.size(); j++){
+
+        // }
+    }
+
+
+    // // DEBUG
+    // std::cout << "size: "<< A.size()<< std::endl;
+    // display_vec(L);
+
+    // std::cout << "U MAT:"<< std::endl;
+    // display_vec(U);
+
+    return std::make_tuple(L, L);
 }

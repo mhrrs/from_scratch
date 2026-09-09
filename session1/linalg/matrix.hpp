@@ -11,5 +11,6 @@ using namespace std;
 
 vector<float> matrix_mult(vector<float> A, vector<float> B);
 
+vector<float> forward_substitute(vector<float> L);
 
 #endif
