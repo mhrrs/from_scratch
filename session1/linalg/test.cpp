@@ -11,6 +11,7 @@ using namespace std;
 int main(){
     //first lets create the A, and y to find 'x'
     vector<vector<float>> A = {{2,1,1}, {4,3,3}, {8,7,9}};
+    // vector<vector<float>> A = {{2,1,1,2}, {4,3,3, 2}, {8,7,9, 9}, {5, 4, 7, 7}};
     vector<float> y = {1,0,1};
 
     //test LU Decomp:
