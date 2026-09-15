@@ -181,7 +181,7 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
         float pivot = U[i];
 
         // go through each row in this column and reduce value.
-        for (int r = i+cols; r <= (cols*cols); r+=cols){  // << include -1 in loop condition?
+        for (int r = i+cols; r <= (cols*cols)-1; r+=cols){
             // ^ maybe iterate by row number so that you then have the same index to call a specific row    
             float mult = U[r]/pivot;
             std::cout << "pivot: "<< pivot << " | L[r]: " << U[r] << std::endl;
