@@ -137,11 +137,11 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
     // turning L into A
     for (int i = 0; i < int(A.size()); i++){
         for (int j = 0; j < int(A.size()); j++){
-                L.push_back(A[i][j]);
+                U.push_back(A[i][j]);
                 if (i == j){
-                    U.push_back(1.0);
+                    L.push_back(1.0);
                 } else{
-                    U.push_back(0.0);
+                    L.push_back(0.0);
                 }
         }
     }
@@ -178,13 +178,13 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
 
     // lol so we're actually calculating U in place?
     for (int i = 0; i <= (cols*cols)-1; i+=cols+1){
-        float pivot = L[i];
+        float pivot = U[i];
 
         // go through each row in this column and reduce value.
         for (int r = i+cols; r <= (cols*cols); r+=cols){  // << include -1 in loop condition?
             // ^ maybe iterate by row number so that you then have the same index to call a specific row    
-            float mult = L[r]/pivot;
-            std::cout << "pivot: "<< pivot << " | L[r]: " << L[r] << std::endl;
+            float mult = U[r]/pivot;
+            std::cout << "pivot: "<< pivot << " | L[r]: " << U[r] << std::endl;
             // std::cout << "r: "<< r << std::endl;
 
             // obtain row values by identifying what row you're on
@@ -194,9 +194,9 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
             // AH okay so the issue is that its subtracting from one row up
             // go through each column and reduct the value
             for (int j = 0; j < cols; j++){
-                L[j+(cols*cur_row_start)] = L[j+(cols*cur_row_start)] - (mult * L[j+(cols*piv_row_start)]);
+                U[j+(cols*cur_row_start)] = U[j+(cols*cur_row_start)] - (mult * U[j+(cols*piv_row_start)]);
                 if(((j+(cols*cur_row_start)) % cols) == 0){
-                    U[j+r] = mult;
+                    L[j+r] = mult;
                 }
                 std::cout << "cur_row_start: " << cur_row_start << std::endl;
                 std::cout << "mod var: " << j+r-(cols*cur_row_start) << std::endl;
@@ -207,11 +207,11 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
 
         // DEBUG
         std::cout << "mid run: "<< i << " of " << (cols*cols)-1 << std::endl;
-        display_vec(L);
+        display_vec(U);
     }
 
-    std::cout << "U MAT:"<< std::endl;
-    display_vec(U);
+    std::cout << "L MAT:"<< std::endl;
+    display_vec(L);
 
-    return std::make_tuple(L, L);
+    return std::make_tuple(L, U);
 }
