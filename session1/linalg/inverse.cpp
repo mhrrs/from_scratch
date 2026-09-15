@@ -8,6 +8,14 @@ using namespace std;
 
 
 
+// DOCUMENTATION:
+// THIS IS how a matrix is indexed column-wise:
+//     0 1 2
+//     3 4 5
+//     6 7 8
+//
+
+
 
 // inverse calculation
 // vector<vector <float>> inverse_mat(vector<vector <float>> Mat){
@@ -129,8 +137,12 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
     // turning L into A
     for (int i = 0; i < int(A.size()); i++){
         for (int j = 0; j < int(A.size()); j++){
-                L.push_back(A[i][j]);
-                U.push_back(0);
+                U.push_back(A[i][j]);
+                if (i == j){
+                    L.push_back(1.0);
+                } else{
+                    L.push_back(0.0);
+                }
         }
     }
 
@@ -142,50 +154,64 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<v
     // use row based elim
     // reset and repeat
 
+    // go along diagonal => first loop
+    // find all non-zero values below that diagonal and calculate multiplier
+    //    middle loop iterates over each value in that column 
+    //   (which is accessible by taking diagonal value and adding col size)
+    // the subtract that mult's row by the current diagonal row (do this by iterating over col size)
+
     //idea:
     // turn diagonal into 1s
     // iterate through vector, if 1 is found add to TOTAL, then select the
     // number of proceeding terms using the TOTAL value
 
-    // modify L in place
-    for (int i = 0; i <= (cols*cols)-1; i+=cols+1){ // < moves along diagonal
-        float pivot = L[i];
+    // NOTES ON VARS:
+    // i moves along diagonal
+    // i/(cols+1) => determines what row you are on
+    // L[r] is the value being removed
+    // r is diagonal idx + col size >> r lets us know the value under the diagonal it does NOT start us correctly in the third loop
+    // we need another agnostic value that determine current row in update mode
+
+
+    // j+r = for item under this diagonal, calculate the next 3
+    //  
+
+    // lol so we're actually calculating U in place?
+    for (int i = 0; i <= (cols*cols)-1; i+=cols+1){
+        float pivot = U[i];
 
         // go through each row in this column and reduce value.
-        for (int r = cols; r <= (cols*cols)-1; r+=cols){ // << Why did removing cols+1 work here?? 
+        for (int r = i+cols; r <= (cols*cols)-1; r+=cols){
             // ^ maybe iterate by row number so that you then have the same index to call a specific row    
-            float mult = L[r]/pivot;
+            float mult = U[r]/pivot;
+            std::cout << "pivot: "<< pivot << " | L[r]: " << U[r] << std::endl;
+            // std::cout << "r: "<< r << std::endl;
 
             // obtain row values by identifying what row you're on
-            int cur_row_start = (r % cols);
+            int cur_row_start = (r / cols); // < probably bad practice?
+            int piv_row_start = (i / cols);
 
-            std::cout << "mult: "  << mult << "| L[r]: " << L[r] << " | pivot: " << pivot << std::endl;
-            // std::cout << "r: " << r << " | r PER cols: " << r%cols << std::endl;
-            // std::cout << "cur_row_start: " << cur_row_start << std::endl;
-
-            for (int j = cur_row_start; j < cols; j++){
-                std::cout << "j: " << j << std::endl;
-                L[j] = L[j] - (mult * L[j-cols-1]);
+            // AH okay so the issue is that its subtracting from one row up
+            // go through each column and reduct the value
+            for (int j = 0; j < cols; j++){
+                U[j+(cols*cur_row_start)] = U[j+(cols*cur_row_start)] - (mult * U[j+(cols*piv_row_start)]);
+                if(((j+(cols*cur_row_start)) % cols) == 0){
+                    L[j+r] = mult;
+                }
+                std::cout << "cur_row_start: " << cur_row_start << std::endl;
+                std::cout << "mod var: " << j+r-(cols*cur_row_start) << std::endl;
+                // std::cout << "i: " << i << " | j+r: " << j+r << " | cols: " << cols << std::endl;
             }
 
         }
 
         // DEBUG
         std::cout << "mid run: "<< i << " of " << (cols*cols)-1 << std::endl;
-        display_vec(L);
-
-        // for (int j = 0; j < L.size(); j++){
-
-        // }
+        display_vec(U);
     }
 
+    std::cout << "L MAT:"<< std::endl;
+    display_vec(L);
 
-    // // DEBUG
-    // std::cout << "size: "<< A.size()<< std::endl;
-    // display_vec(L);
-
-    // std::cout << "U MAT:"<< std::endl;
-    // display_vec(U);
-
-    return std::make_tuple(L, L);
+    return std::make_tuple(L, U);
 }

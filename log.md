@@ -62,3 +62,12 @@ Next steps:
 - finish elimination step.
 - test and evaluate.
 - 
+
+
+*09/14/2026:*
+- holy shit bro we've been working on this project way too long with no progress.
+- OK LOOK... So i think you're having an issue with the optimization function because you go through each diagonal, get the pivot, then the mult, then start clearing values, however, you don't add them to U correctly because the index is off in the middle loop. The one that goes over each column makes sense, but i feat the indexing pattern of your vector which is:
+[0, 3, 6, 1, 4, 7, 2, 5, 8]
+is incompatible with the current implementation.
+-> SO... go back through and make sure each loop follows the same column-wise assumption
+
