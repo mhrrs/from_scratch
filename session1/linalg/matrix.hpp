@@ -7,10 +7,16 @@
 #include <array>
 #include <tuple>
 #include <cmath>
-using namespace std;
 
-vector<float> matrix_mult(vector<float> A, vector<float> B);
 
-vector<float> forward_substitute(vector<float> L);
+std::vector<float> matrix_mult(std::vector<float> A, std::vector<float> B);
+
+std::vector<float> forward_substitute(std::vector<float> L);
+
+struct vmatrix {
+    std::vector<float> vec;
+    int rows;
+    int cols;
+};
 
 #endif

@@ -14,6 +14,8 @@ int main(){
     // vector<vector<float>> A = {{2,1,1,2}, {4,3,3, 2}, {8,7,9, 9}, {5, 4, 7, 7}};
     vector<float> y = {1,0,1};
 
+    // turn into vmatrix ?
+
     //test LU Decomp:
     auto result = LU_decompisition_opt(A);
     std::vector<float> L = std::get<0>(result);

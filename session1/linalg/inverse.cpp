@@ -125,6 +125,9 @@ std::tuple<std::vector<float>, std::vector<float>> LU_decompisition(vector<vecto
 
 
 // Simply trying to optimize on the code created above
+// TODO (BIG DEAL, do later): add partial pivoting. Right now a zero (or tiny) pivot on the
+// diagonal gives inf/NaN or blown-up roundoff — need to swap in the largest-magnitude row
+// from at-or-below the pivot before eliminating, and track the swaps (permutation => PA = LU).
 std::tuple<std::vector<float>, std::vector<float>> LU_decompisition_opt(vector<vector <float>> A){
     vector<float> L;
     vector<float> U;

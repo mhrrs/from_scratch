@@ -9,10 +9,41 @@
 using namespace std;
 
 
-vector<float> matrix_mult(vector<float> L, vector<float> B){
+vector<float> matrix_mult(vmatrix A, vmatrix B){
     // under dev
-    vector<float> y_hat = forward_substitute(L);
-    return y_hat;
+    // vector<float> y_hat = forward_substitute(L);
+    // return y_hat;
+
+    // ensure A col size matches B row size
+    // this is probably redundant, get rid of it
+    int a_col = A.cols; int a_row = A.rows;
+    int b_col = B.cols; int b_row = B.rows;
+
+    // create vmatrix C 
+    std::vector<float> c_vec;
+    for (int i =0; i <= A.rows*B.cols;i++){
+        c_vec.push_back(0.0);
+    }
+    vmatrix C = {c_vec, A.rows, B.cols};
+    
+
+
+    // iterate through each item in vec, keep track of col and row item
+    // row == cur_row = 
+    // col == cur_col
+
+    // do this to find row and col
+    
+    // really just two loops
+    // one that iterates over rows
+    // second over columns
+    // then just find at which index those two intersect (which should be easy, because
+    // its the only index value that the two vecs should share)
+    for (int i = 0; i < C.rows; i+=C.rows){
+        for (int j = 0; j < C.cols; j+=C.cols){
+            
+        }
+    }
 }
 
 
